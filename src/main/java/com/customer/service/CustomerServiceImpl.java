@@ -25,7 +25,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	private BigDecimal processDiscount(Billing billing) {
 		Discount discount = DiscountFactory.getDiscountInstace(billing.getCustomer());
-		return discount.applyDiscount(billing.getPurchaseAmount());
+		return billing.getPurchaseAmount().subtract(discount.applyDiscount(billing.getPurchaseAmount()));
 	}
 
 }
