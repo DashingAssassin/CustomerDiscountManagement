@@ -3,10 +3,14 @@ package com.customer.model;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonAutoDetect
 public class Customer {
+
+	@JsonIgnore
+	private int id;
 
 	@JsonProperty("name")
 	private String name;
@@ -16,6 +20,13 @@ public class Customer {
 
 	public Customer(String name, CustomerType customerType) {
 		super();
+		this.name = name;
+		this.customerType = customerType;
+	}
+
+	public Customer(int id, String name, CustomerType customerType) {
+		super();
+		this.id = id;
 		this.name = name;
 		this.customerType = customerType;
 	}
@@ -67,6 +78,20 @@ public class Customer {
 			return false;
 		Customer other = (Customer) obj;
 		return customerType == other.customerType && Objects.equals(name, other.name);
+	}
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

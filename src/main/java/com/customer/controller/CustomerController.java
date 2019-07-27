@@ -1,12 +1,12 @@
 package com.customer.controller;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,11 +21,10 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 
-	@GetMapping(value = { "/getAllCustomer" }, produces = { MediaType.APPLICATION_JSON }, consumes = {
+	@GetMapping(value = { "/getCustomer/{id}" }, produces = { MediaType.APPLICATION_JSON }, consumes = {
 			MediaType.APPLICATION_JSON })
-	public List<Customer> getAllCustomer() {
-		// return this.customerService.getAllCustomer();
-		return null;
+	public Customer getCustomerById(@PathVariable("id") int id) {
+		return this.customerService.getCustomerById(id);
 	}
 
 	@PostMapping(value = { "/billCustomer" }, produces = { MediaType.APPLICATION_JSON }, consumes = {
