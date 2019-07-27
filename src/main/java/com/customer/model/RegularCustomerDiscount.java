@@ -1,6 +1,7 @@
 package com.customer.model;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -23,9 +24,9 @@ public class RegularCustomerDiscount extends Discount {
 
 	private static final Map<BigDecimal, Double> discountMap;
 	static {
-		discountMap = new TreeMap();
-		discountMap.put(BigDecimal.valueOf(4999), Double.valueOf(0));
-		discountMap.put(BigDecimal.valueOf(9999), Double.valueOf(10));
+		discountMap = new TreeMap<BigDecimal, Double>(Collections.reverseOrder());
+		discountMap.put(BigDecimal.valueOf(0), Double.valueOf(0));
+		discountMap.put(BigDecimal.valueOf(5000), Double.valueOf(10));
 		discountMap.put(BigDecimal.valueOf(10000), Double.valueOf(20));
 	}
 

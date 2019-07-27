@@ -7,6 +7,8 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.customer.model.Billing;
@@ -26,9 +28,9 @@ public class CustomerController {
 		return null;
 	}
 
-	@GetMapping(value = { "/billCustomer" }, produces = { MediaType.APPLICATION_JSON }, consumes = {
+	@PostMapping(value = { "/billCustomer" }, produces = { MediaType.APPLICATION_JSON }, consumes = {
 			MediaType.APPLICATION_JSON })
-	public BigDecimal calculateBillAmount(Billing billing) {
+	public BigDecimal calculateBillAmount(@RequestBody Billing billing) {
 		return this.customerService.calculateBillAmount(billing);
 	}
 

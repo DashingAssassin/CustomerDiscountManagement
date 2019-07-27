@@ -49,7 +49,8 @@ public class Discount {
 		for (BigDecimal bigDecimal : keySet) {
 			if (process(bigDecimal, amount)) {
 				BigDecimal bg = amount.subtract(bigDecimal);
-				discount = discount.add(bg.multiply(BigDecimal.valueOf(discountMap.get(bigDecimal))));
+				discount = discount.add(
+						bg.multiply(BigDecimal.valueOf(discountMap.get(bigDecimal))).divide(BigDecimal.valueOf(100)));
 				amount = amount.subtract(bg);
 			}
 		}

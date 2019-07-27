@@ -5,11 +5,11 @@ import com.customer.model.CustomerType;
 
 public class CustomerTestData {
 
-	public Customer getPremiumCustomer() {
+	public static Customer getPremiumCustomer() {
 		return new Customer("premium", CustomerType.PREMIUM);
 	}
 
-	public Customer getRegularCustomer() {
+	public static Customer getRegularCustomer() {
 		return new Customer("regular", CustomerType.REGULAR);
 	}
 
