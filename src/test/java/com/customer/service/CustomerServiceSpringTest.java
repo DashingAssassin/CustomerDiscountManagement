@@ -9,7 +9,6 @@ import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.customer.controller.CustomerController;
 import com.customer.model.Billing;
 import com.customer.test.model.BillingTestData;
 
@@ -96,6 +95,46 @@ public class CustomerServiceSpringTest {
 		BigDecimal discount = customerService.calculateBillAmount(billing);
 		Assert.assertNotNull(discount);
 		Assert.assertEquals(BigDecimal.valueOf(300.0), discount);
+	}
+
+	@Test
+	public void test_discountonpurchasingamount_whenPurchasingAmountGreaterThan10000_onRegularCustomer() {
+		Billing billing = BillingTestData.getBillingWithRegularCustomerHavingAmountsGreaterThan10000();
+		BigDecimal discount = customerService.calculateBillAmount(billing);
+		Assert.assertNotNull(discount);
+		Assert.assertEquals(BigDecimal.valueOf(1500.0), discount);
+	}
+
+	@Test
+	public void test_discountonpurchasingamount_whenPurchasingAmountEquals10000_onRegularCustomer() {
+		Billing billing = BillingTestData.getBillingWithRegularCustomerHavingAmountsEquals10000();
+		BigDecimal discount = customerService.calculateBillAmount(billing);
+		Assert.assertNotNull(discount);
+		Assert.assertEquals(BigDecimal.valueOf(500.0), discount);
+	}
+
+	@Test
+	public void test_discountonpurchasingamount_whenPurchasingAmountLessThan10000AndGreaterThan5000_onRegularCustomer() {
+		Billing billing = BillingTestData.getBillingWithRegularCustomerHavingAmountsLessThan10000ButGreaterThan5000();
+		BigDecimal discount = customerService.calculateBillAmount(billing);
+		Assert.assertNotNull(discount);
+		Assert.assertEquals(BigDecimal.valueOf(300.0), discount);
+	}
+
+	@Test
+	public void test_discountonpurchasingamount_whenPurchasingAmountEquals5000_onRegularCustomer() {
+		Billing billing = BillingTestData.getBillingWithRegularCustomerHavingAmountsEquals5000();
+		BigDecimal discount = customerService.calculateBillAmount(billing);
+		Assert.assertNotNull(discount);
+		Assert.assertEquals(BigDecimal.valueOf(0.0), discount);
+	}
+
+	@Test
+	public void test_discountonpurchasingamount_whenPurchasingAmountLessThan5000_onRegularCustomer() {
+		Billing billing = BillingTestData.getBillingWithRegularCustomerHavingAmountsLessThan5000ButGreaterThan0();
+		BigDecimal discount = customerService.calculateBillAmount(billing);
+		Assert.assertNotNull(discount);
+		Assert.assertEquals(BigDecimal.valueOf(0.0), discount);
 	}
 
 }
